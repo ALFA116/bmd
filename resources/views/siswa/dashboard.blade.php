@@ -119,6 +119,45 @@
         .transaction-history i {
             margin-left: 5px;
         }
+
+        .transfer-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .transfer-box h2 {
+            margin-top: 0;
+        }
+
+        .transfer-box select,
+        .transfer-box input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .transfer-box button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .transfer-box .transfer {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .transfer-box .transfer:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
@@ -161,21 +200,6 @@
                 <button type="submit" class="withdraw">Withdraw</button>
             </form>
         </div>
-        <div class="box">
-            <h2>Transfer Dana</h2>
-            <form method="POST" action="{{ route('siswa.transferFunds') }}">
-                @csrf
-                <select name="recipient_id" required>
-                    <option value="">-- Pilih Teman --</option>
-                    @foreach($friends as $friend)
-                        <option value="{{ $friend->id }}">{{ $friend->name }}</option>
-                    @endforeach
-                </select>
-                <input type="number" name="amount" placeholder="Jumlah Dana" required>
-                <input type="text" name="description" placeholder="Deskripsi" required>
-                <button type="submit" class="save">Transfer</button>
-            </form>
-        </div>
     </div>
 
     <div class="transaction-history">
@@ -206,6 +230,22 @@
             @endforeach
         </table>
         <a href="{{ route('siswa.downloadTransactionHistory') }}" class="button" style="background-color: #007bff; color: white; padding: 10px; border-radius: 5px; text-decoration: none;">Download PDF</a>
+    </div>
+
+    <div class="transfer-box">
+        <h2>Transfer Dana</h2>
+        <form method="POST" action="{{ route('siswa.transferFunds') }}">
+            @csrf
+            <select name="recipient_id" required>
+                <option value="">-- Pilih Teman --</option>
+                @foreach($friends as $friend)
+                    <option value="{{ $friend->id }}">{{ $friend->name }}</option>
+                @endforeach
+            </select>
+            <input type="number" name="amount" placeholder="Jumlah Dana" required>
+            <input type="text" name="description" placeholder="Deskripsi" required>
+            <button type="submit" class="transfer">Transfer</button>
+        </form>
     </div>
 </body>
 </html>

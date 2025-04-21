@@ -70,7 +70,7 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-        public function downloadTransactionHistory()
+    public function downloadTransactionHistory()
     {
         $transactions = Transaction::with('user')->get();
 

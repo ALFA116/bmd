@@ -39,7 +39,7 @@ Route::post('admin/update-user/{id}', [AdminController::class, 'updateUser']);
 Route::get('/siswa/dashboard', [SiswaController::class, 'showDashboard'])->name('siswa.dashboard');
 Route::post('/siswa/enter-funds', [siswaController::class, 'enterFunds'])->name('siswa.enterFunds');
 Route::post('/siswa/withdraw-funds', [siswaController::class, 'withdrawFunds'])->name('siswa.withdrawFunds');
-Route::post('/siswa/transfer-funds', [siswaController::class, 'transferFunds'])->name('siswa.transferFunds');
+Route::post('/siswa/transfer-funds', [SiswaController::class, 'transferFunds'])->name('siswa.transferFunds');
 
 Route::get('/bank/dashboard', [BankController::class, 'dashboard'])->name('bank.dashboard');
 Route::post('/bank/deposit', [BankController::class, 'deposit'])->name('bank.deposit');
