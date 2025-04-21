@@ -76,6 +76,18 @@ class SiswaController extends Controller
         ]);
 
         $user = auth()->user();
+        $recipient = User::find($request->recipient_id);
+
+
+        if ($user->wallet->credit < $request->amount) {
+            return redirect()->back()->with('error', 'Insufficient balance.');
+        }
+
+        $user->wallet->credit -= $request->amount;
+        $user->wallet->save();
+
+        $recipient->wallet->credit += $request->amount;
+        $recipient->wallet->save();
 
         Transaction::create([
             'users_id' => $user->id,
@@ -84,6 +96,15 @@ class SiswaController extends Controller
             'price' => $request->amount,
             'quantity' => 1,
             'description' => $request->description,
+        ]);
+
+        Transaction::create([
+            'users_id' => $recipient->id,
+            'status' => 'Menunggu',
+            'order_code' => uniqid(),
+            'price' => $request->amount,
+            'quantity' => 1,
+            'description' => 'Received from ' . $user->name,
         ]);
 
         return redirect()->back()->with('success', 'Transfer initiated, awaiting approval.');
