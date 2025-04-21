@@ -69,4 +69,12 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard');
     }
+
+        public function downloadTransactionHistory()
+    {
+        $transactions = Transaction::with('user')->get();
+
+        $pdf = \PDF::loadView('pdf.transaction_history', compact('transactions'));
+        return $pdf->download('transaction_history.pdf');
+    }
 }

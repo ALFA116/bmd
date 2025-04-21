@@ -161,6 +161,21 @@
                 <button type="submit" class="withdraw">Withdraw</button>
             </form>
         </div>
+        <div class="box">
+            <h2>Transfer Dana</h2>
+            <form method="POST" action="{{ route('siswa.transferFunds') }}">
+                @csrf
+                <select name="recipient_id" required>
+                    <option value="">-- Pilih Teman --</option>
+                    @foreach($friends as $friend)
+                        <option value="{{ $friend->id }}">{{ $friend->name }}</option>
+                    @endforeach
+                </select>
+                <input type="number" name="amount" placeholder="Jumlah Dana" required>
+                <input type="text" name="description" placeholder="Deskripsi" required>
+                <button type="submit" class="save">Transfer</button>
+            </form>
+        </div>
     </div>
 
     <div class="transaction-history">

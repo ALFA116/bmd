@@ -134,5 +134,6 @@
         </li>
         @endforeach
     </ul>
+    <a href="{{ route('admin.downloadTransactionHistory') }}" class="button" style="background-color: #007bff; color: white; padding: 10px; border-radius: 5px; text-decoration: none;">Download PDF</a>
 </body>
 </html>

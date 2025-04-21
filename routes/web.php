@@ -53,3 +53,4 @@ Route::get('/dashboard', function () {
 
 Route::get('/siswa/download-transaction-history', [SiswaController::class, 'downloadTransactionHistory'])->name('siswa.downloadTransactionHistory');
 Route::get('/bank/download-transaction-history', [BankController::class, 'downloadTransactionHistory'])->name('bank.downloadTransactionHistory');
+Route::get('/admin/download-transaction-history', [AdminController::class, 'downloadTransactionHistory'])->name('admin.downloadTransactionHistory');
